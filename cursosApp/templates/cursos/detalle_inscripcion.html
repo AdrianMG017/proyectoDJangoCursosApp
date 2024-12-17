@@ -1,0 +1,12 @@
+{% extends 'cursos/base.html' %}
+
+{% block title %}Detalle de Inscripcion{% endblock %}
+
+{% block content %}
+    <h1>Detalle de Inscripcion</h1>
+    <h2>{{inscripcion}}</h2>
+
+    <a href="{% url 'listarInscripcion' %}">Volver</a>
+    <a href="{% url 'eliminarInscripcion' pk=inscripcion.pk %}">Eliminar</a>
+
+{% endblock %}

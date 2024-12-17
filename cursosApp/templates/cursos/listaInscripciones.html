@@ -1,0 +1,14 @@
+{% extends 'cursos/base.html' %}
+{% block title %}Lista de Inscripciones{% endblock %}
+
+{% block content %}
+<h1>Lista de Inscripciones</h1>
+    <ul>
+        {% for i in inscripciones %}
+            <li><a href="{% url 'detalleInscripcion' pk=i.pk %}">{{i}}</a></li>
+        {% empty %}
+            <p>Todavia no hay datos añadidos.</p>
+        {% endfor %}
+    </ul>
+    <button><a href="{% url 'newInscripcion' %}">Crear inscripcion</a></button>
+{% endblock %}

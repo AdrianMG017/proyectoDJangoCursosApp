@@ -53,14 +53,14 @@ def newEstudiante(request):
     return render(request, 'cursos/newEstudiante.html', {'form': form})
 
 def listarEstudiantes(request):
-    estudiantes = Estudiante.objects.all()
-    return render(request, 'cursos/listaEstudiantes.html', {'estudiantes': estudiantes})
+    estudiante = Estudiante.objects.all()
+    return render(request, 'cursos/listaEstudiantes.html', {'estudiante': estudiante})
 
-def detalleEstudiante(request,pk):
+def detalleCurso(request,pk):
     estudiante = get_object_or_404(Estudiante, pk=pk)
     return render(request, 'cursos/detalle_estudiante.html', {'estudiante':estudiante})
 
-def editarEstudiante(request,pk):
+def editarCurso(request,pk):
     estudiante = get_object_or_404(Estudiante, pk=pk)
     if request.method == 'POST':
         form = estudianteForm(request.POST,instance=estudiante)
@@ -71,38 +71,10 @@ def editarEstudiante(request,pk):
         form = estudianteForm(instance=estudiante)
     return render(request, 'cursos/editar_estudiante.html', {'form': form})
 
-def eliminarEstudiante(request, pk):
+def eliminarCurso(request, pk):
     estudiante = get_object_or_404(Estudiante, pk=pk)
     if request.method == 'POST':
         estudiante.delete()
-        return redirect('listarEstudiantes')
+        return redirect('listarCursos')
     else:
-        return render(request, 'cursos/eliminarEstudiante.html', {'estudiante':estudiante})
-    
-
-#Inscripcion
-def newInscripcion(request):
-    if request.method == 'POST':
-        form = inscripcionForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('listarInscripcion')
-    else:
-        form = inscripcionForm()
-    return render(request, 'cursos/newInscripcion.html', {'form': form})
-
-def listarInscripcion(request):
-    inscripciones = Inscripcion.objects.all()
-    return render(request, 'cursos/listaInscripciones.html', {'inscripciones': inscripciones})
-
-def detalleInscripcion(request,pk):
-    inscripcion = get_object_or_404(Inscripcion, pk=pk)
-    return render(request, 'cursos/detalle_inscripcion.html', {'inscripcion':inscripcion})
-
-def eliminarInscripcion(request, pk):
-    inscripcion = get_object_or_404(Inscripcion, pk=pk)
-    if request.method == 'POST':
-        inscripcion.delete()
-        return redirect('listarInscripcion')
-    else:
-        return render(request, 'cursos/eliminarInscripcion.html', {'inscripcion':inscripcion})
+        return render(request, 'cursos/eliminarEstudiante.html', {'curso':estudiante})

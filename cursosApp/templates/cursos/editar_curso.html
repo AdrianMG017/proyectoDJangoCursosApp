@@ -1,0 +1,12 @@
+{% extends 'cursos/base.html' %}
+
+{% block title %}Editar Curso{% endblock %}
+
+{% block content %}
+    <h1>Editar curso</h1>
+    <form action="" method="post">
+        {% csrf_token %}
+        {{form}}
+        <input type="submit" value="Editar">
+    </form>
+{% endblock %}

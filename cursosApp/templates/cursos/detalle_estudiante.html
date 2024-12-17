@@ -1,0 +1,15 @@
+{% extends 'cursos/base.html' %}
+
+{% block title %}Detalle de Estudiante{% endblock %}
+
+{% block content %}
+    <h1>Detalle de Estudiante</h1>
+    <h2>{{estudiante}}</h2>
+    <p>Email: {{estudiante.email}}</p>
+    <p>Fecha nacimiento: {{estudiante.fecha_nacimiento}}</p>
+
+    <a href="{% url 'listarEstudiantes' %}">Volver</a>
+    <a href="{% url 'editarEstudiante' pk=estudiante.pk %}">Editar</a>
+    <a href="{% url 'eliminarEstudiante' pk=estudiante.pk %}">Eliminar</a>
+
+{% endblock %}

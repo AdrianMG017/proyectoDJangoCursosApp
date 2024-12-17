@@ -1,0 +1,12 @@
+{% extends 'cursos/base.html' %}
+
+{% block title %}Editar Inscripcion{% endblock %}
+
+{% block content %}
+    <h1>Eliminar el Inscripcion {{inscripcion}}</h1>
+    <form action="" method="post">
+        {% csrf_token %}
+        <input type="submit" value="Si">
+    </form>
+    <button><a href="{% url 'listarInscripcion' %}">No</a></button>
+{% endblock %}

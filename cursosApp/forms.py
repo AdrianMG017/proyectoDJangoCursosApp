@@ -21,27 +21,29 @@ class cursoForm(forms.ModelForm):
         return cleaned_data
 
 class estudianteForm(forms.ModelForm):
-    model = models.Estudiante
-    fields = '__all__'
-    widgets = {
-            'fecha_nacimiento': forms.DateInput(attrs={'type':'date'})
+    class Meta:
+        model = models.Estudiante
+        fields = '__all__'
+        widgets = {
+                'fecha_nacimiento': forms.DateInput(attrs={'type':'date'})
     }
 
     def clean(self):
         cleaned_data = super().clean()
         email = cleaned_data.get('email')
         fecha_nacimiento = cleaned_data.get('fecha_nacimiento')
-        if models.Estudiante.objects.get(email):
-            raise ValidationError("Este email ya existe.")
+        if models.Estudiante.objects.filter(email=email).exists():
+            raise ValidationError("El email ya esta en uso.")
         if date.today().year - fecha_nacimiento.year < 18:
             raise ValidationError("Debes de tener mayoria de edad.")
         return cleaned_data
 
 class inscripcionForm(forms.ModelForm):
-    model = models.Inscripcion
-    fields = '__all__'
-    widgets = {
-            'fecha_inscripcion': forms.DateInput(attrs={'type':'date'})
+    class Meta:
+        model = models.Inscripcion
+        fields = '__all__'
+        widgets = {
+                'fecha_inscripcion': forms.DateInput(attrs={'type':'date'})
     }
 
     def clean(self):

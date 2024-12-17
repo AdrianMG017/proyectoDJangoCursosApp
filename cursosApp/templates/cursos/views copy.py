@@ -75,7 +75,7 @@ def eliminarEstudiante(request, pk):
     estudiante = get_object_or_404(Estudiante, pk=pk)
     if request.method == 'POST':
         estudiante.delete()
-        return redirect('listarEstudiantes')
+        return redirect('listarCursos')
     else:
         return render(request, 'cursos/eliminarEstudiante.html', {'estudiante':estudiante})
     
