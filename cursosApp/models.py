@@ -9,6 +9,9 @@ class Curso(models.Model):
     fecha_inicio = models.DateField()
     fecha_fin = models.DateField()
 
+    def __str__(self):
+        return f'{self.codigo} - {self.nombre}' 
+    
     def clean(self):
         if self.fecha_inicio > self.fecha_fin:
             raise ValidationError("La fecha de inicio no puede ser mayor a la fecha final.")
@@ -16,8 +19,11 @@ class Curso(models.Model):
 
 class Estudiante(models.Model):
     nombre = models.CharField(max_length=100)
-    email = models.EmailField()
-    fecha_nacimiento = models.CharField()
+    email = models.EmailField(unique=True)
+    fecha_nacimiento = models.DateField()
+
+    def __str__(self):
+        return self.nombre
 
     def clean(self):
         if self.fecha_nacimiento > date.today():
@@ -26,10 +32,13 @@ class Estudiante(models.Model):
             raise ValidationError("Debes de tener mayoria de edad.")
         return super().clean()
         
-class Incripcion(models.Model):
+class Inscripcion(models.Model):
     estudiante = models.ForeignKey(Estudiante,on_delete=models.CASCADE)
     curso = models.ForeignKey(Curso,on_delete=models.CASCADE)
-    fecha_inscripcion = models.CharField()
+    fecha_inscripcion = models.DateField()
+
+    def __str__(self):
+        return f'{self.curso.nombre} - {self.estudiante.nombre} - {self.fecha_inscripcion}'
 
     def clean(self):
         if self.curso.fecha_fin < self.fecha_inscripcion:
