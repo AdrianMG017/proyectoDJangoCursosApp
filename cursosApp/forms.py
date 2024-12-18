@@ -34,7 +34,8 @@ class estudianteForm(forms.ModelForm):
         fecha_nacimiento = cleaned_data.get('fecha_nacimiento')
         if models.Estudiante.objects.filter(email=email).exists():
             raise ValidationError("El email ya esta en uso.")
-        if date.today().year - fecha_nacimiento.year < 18:
+        edad=(date.today() - fecha_nacimiento).days // 365
+        if edad < 18:
             raise ValidationError("Debes de tener mayoria de edad.")
         return cleaned_data
 
