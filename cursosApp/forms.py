@@ -8,8 +8,8 @@ class cursoForm(forms.ModelForm):
         model = models.Curso
         fields = '__all__'
         widgets = {
-                'fecha_inicio': forms.DateInput(attrs={'type': 'date'}),
-                'fecha_fin': forms.DateInput(attrs={'type': 'date'}),
+                'fecha_inicio': forms.DateInput(format="Y%-m%-d%",attrs={'type': 'date'}),
+                'fecha_fin': forms.DateInput(format="Y%-m%-d%",attrs={'type': 'date'}),
             }
     def clean(self):
         cleaned_data = super().clean()
@@ -25,7 +25,7 @@ class estudianteForm(forms.ModelForm):
         model = models.Estudiante
         fields = '__all__'
         widgets = {
-                'fecha_nacimiento': forms.DateInput(attrs={'type':'date'})
+                'fecha_nacimiento': forms.DateInput(format="Y%-m%-d%",attrs={'type':'date'})
     }
 
     def clean(self):
