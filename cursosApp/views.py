@@ -16,18 +16,12 @@ class CrearCurso(CreateView):
     template_name = 'cursos/newCurso.html'
     form_class = cursoForm
     success_url = reverse_lazy('listarCursos')
-
-    def form_valid(self, form):
-        return super().form_valid(form)
     
 class EditarCurso(UpdateView):
     model = Curso
     template_name = 'cursos/editar_curso.html'
     form_class = cursoForm
     success_url = reverse_lazy('listarCursos')
-    
-    def form_valid(self, form):
-        return super().form_valid(form)
     
 class DeleteCurso(DeleteView):
     model = Curso
