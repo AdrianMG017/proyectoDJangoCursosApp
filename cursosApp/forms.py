@@ -32,7 +32,7 @@ class estudianteForm(forms.ModelForm):
         cleaned_data = super().clean()
         email = cleaned_data.get('email')
         fecha_nacimiento = cleaned_data.get('fecha_nacimiento')
-        if models.Estudiante.objects.filter(email=email).exists():
+        if models.Estudiante.objects.filter(email=email).exclude(pk=cleaned_data.get('pk')).exists():
             raise ValidationError("El email ya esta en uso.")
         if date.today().year - fecha_nacimiento.year < 18:
             raise ValidationError("Debes de tener mayoria de edad.")
