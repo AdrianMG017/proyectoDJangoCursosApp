@@ -1,9 +1,40 @@
 from django.shortcuts import redirect, render,get_object_or_404
 from .forms import cursoForm,estudianteForm,inscripcionForm
 from .models import Curso, Estudiante, Inscripcion
+from django.views.generic import ListView, CreateView,UpdateView,DeleteView
+from django.urls import reverse_lazy
 
 # Create your views here.
 #Cursos
+class ListarCurso(ListView):
+    model = Curso
+    template_name = 'cursos/listaCursos.html'
+    context_object_name = "cursos"
+
+class CrearCurso(CreateView):
+    model =Curso
+    template_name = 'cursos/newCurso.html'
+    form_class = cursoForm
+    success_url = reverse_lazy('listarCursos')
+
+    def form_valid(self, form):
+        return super().form_valid(form)
+    
+class EditarCurso(UpdateView):
+    model = Curso
+    template_name = 'cursos/editar_curso.html'
+    form_class = cursoForm
+    success_url = reverse_lazy('listarCursos')
+    
+    def form_valid(self, form):
+        return super().form_valid(form)
+    
+class DeleteCurso(DeleteView):
+    model = Curso
+    template_name = 'cursos/eliminarCurso.html'
+    success_url = reverse_lazy('listarCursos')
+    
+
 def newCurso(request):
     if request.method == 'POST':
         form = cursoForm(request.POST)
