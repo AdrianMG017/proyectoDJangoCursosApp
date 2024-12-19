@@ -7,6 +7,7 @@
     <h2>{{inscripcion}}</h2>
 
     <a href="{% url 'listarInscripcion' %}">Volver</a>
+    <a href="{% url 'editarInscripcion' pk=inscripcion.pk %}">Editar</a>
     <a href="{% url 'eliminarInscripcion' pk=inscripcion.pk %}">Eliminar</a>
 
 {% endblock %}

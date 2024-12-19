@@ -56,3 +56,7 @@ class inscripcionForm(forms.ModelForm):
         if fecha_inscripcion > date.today():
             raise ValidationError("La fecha de no puede ser posterior al día actual.")
         return cleaned_data
+    
+class flitrarInscripcionForms(forms.ModelForm):
+    model =models.Inscripcion
+    fields = ['estudiante','curso']
