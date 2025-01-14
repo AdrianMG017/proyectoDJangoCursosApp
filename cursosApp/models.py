@@ -1,13 +1,15 @@
 from django.db import models
 from django.core.exceptions import ValidationError
 from datetime import date
-
+from django.contrib.auth.models import User
+ 
 # Create your models here.
 class Curso(models.Model):
     nombre = models.CharField(max_length=100)
     codigo = models.CharField(max_length=10,unique=True)
     fecha_inicio = models.DateField()
     fecha_fin = models.DateField()
+    usuario = models.ForeignKey(User)
 
     class Meta():
         verbose_name = "Curso"

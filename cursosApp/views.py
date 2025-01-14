@@ -3,10 +3,11 @@ from .forms import cursoForm,estudianteForm,inscripcionForm, flitrarInscripcionF
 from .models import Curso, Estudiante, Inscripcion
 from django.views.generic import ListView, CreateView,UpdateView,DeleteView
 from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
 #Cursos
-class ListarCurso(ListView):
+class ListarCurso(LoginRequiredMixin,ListView):
     model = Curso
     template_name = 'cursos/listaCursos.html'
     context_object_name = "cursos"
